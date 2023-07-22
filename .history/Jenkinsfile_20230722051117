@@ -31,17 +31,13 @@ pipeline {
      }
 
      stage('K8S Deployment - DEV') {
-           steps {
+             steps {
                parallel(
-                "Deployment"): {
-                withKubeConfig([credentialsId: 'kubeconfig']) {
-                sh "bash k8s-deployment.sh"
+           "Deployment": {
+            withKubeConfig([credentialsId: 'kubeconfig']) {
+               sh "bash k8s-deployment.sh"
              }
            }
 	 
 }
-
-    }
-  }
-
 }

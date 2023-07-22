@@ -16,7 +16,7 @@ spec:
         app: devsecops
     spec:
       containers:
-      - image: drop149/devsecops-java-demo
+      - image: replace
         name: devsecops-container
 ---
 apiVersion: v1
