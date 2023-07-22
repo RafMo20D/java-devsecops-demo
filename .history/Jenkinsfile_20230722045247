@@ -20,12 +20,12 @@ pipeline {
           }
       }
     }
-     stage('Docker Build and Push') {
-           steps {
-              withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
-                  sh 'printenv'
-                  sh 'sudo docker build -t drop149/devsecops-java-demo:""$GIT_COMMIT"" .'
-                  sh 'docker push drop149/devsecops-java-demo:""$GIT_COMMIT""'
+    stage('Docker Build and Push') {
+          steps {
+            withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
+              sh 'printenv'
+              sh 'sudo docker build -t drop149/devsecops-java-demo:""$GIT_COMMIT"" .'
+              sh 'docker push drop149/devsecops-java-demo:""$GIT_COMMIT""'
          }
        }
      }
