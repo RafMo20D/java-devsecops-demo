@@ -1,0 +1,72 @@
+pipeline {
+  agent any
+
+  stages {
+      stage('Build Artifact') {
+            steps {
+              sh "mvn clean package -DskipTests=true"
+              archive 'target/*.jar' 
+            }
+        }
+        
+      stage('Unit Tests and jacoco') {
+            steps {
+              sh "mvn test"
+      }
+      post{
+          always{
+            junit 'target/surefire-reports/*.xml'
+            jacoco execPattern: 'target/jacoco.exec'
+          }
+      }
+    }
+
+    stage('Mutation Tests - PIT') {
+          steps {
+            sh "mvn org.pitest:pitest-maven:mutationCoverage"
+      }
+      post {
+        always {
+          pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
+        }
+      }
+    }
+
+    stage('Docker image build and push') {
+          steps {
+            sh 'docker build -t docker-registry:5000/devsecops-java-demo:latest .'
+            sh 'docker push docker-registry:5000/devsecops-java-demo:lates'
+       }
+     }
+    stage('Kubernetes Deployment - DEV') {
+          steps {
+            sh "sed -i 's#REPLACE_ME#docker-registry:5000/devsecops-java-demo:latest#g' k8s_deployment_service.yaml"
+            sh "kubectl apply -f k8s_deployment_service.yml"
+      }
+    }
+//      stage('Docker Build and Push') {
+//            steps {
+//               withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
+//                   sh 'printenv'
+//                   sh 'sudo docker build -t drop149/devsecops-java-demo:5000/java-app:latest"" .'
+//                   sh 'docker push drop149/devsecops-java-demo:""$GIT_COMMIT""'
+         
+//        }
+//      }
+
+//      }
+
+//      stage('K8S Deployment - DEV') {
+//            steps {
+//              parallel "Deployment": {
+//                 withKubeConfig([credentialsId: 'kubeconfig']) {
+//                 sh "bash k8s-deployment.sh"
+//              }
+//            }
+	 
+// }
+
+    }
+  }
+
+

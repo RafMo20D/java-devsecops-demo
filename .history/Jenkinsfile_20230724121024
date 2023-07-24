@@ -40,30 +40,29 @@ pipeline {
     //         sh "kubectl apply -f k8s_deployment_service.yml"
     //   }
     // }
-     stage('Docker Build and Push') {
-           steps {
-              withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
-                  sh 'printenv'
-                  sh 'sudo docker build -t drop149/devsecops-java-demo:5000/java-app:latest"" .'
-                  sh 'docker push drop149/devsecops-java-demo:""$GIT_COMMIT""'
+//      stage('Docker Build and Push') {
+//            steps {
+//               withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
+//                   sh 'printenv'
+//                   sh 'sudo docker build -t drop149/devsecops-java-demo:5000/java-app:latest"" .'
+//                   sh 'docker push drop149/devsecops-java-demo:""$GIT_COMMIT""'
          
-       }
-     }
+//        }
+//      }
 
-     }
+//      }
 
-     stage('K8S Deployment - DEV') {
-           steps {
-             parallel "Deployment": {
-                withKubeConfig([credentialsId: 'kubeconfig']) {
-                sh "bash k8s-deployment.sh"
-             }
-           }
+//      stage('K8S Deployment - DEV') {
+//            steps {
+//              parallel "Deployment": {
+//                 withKubeConfig([credentialsId: 'kubeconfig']) {
+//                 sh "bash k8s-deployment.sh"
+//              }
+//            }
 	 
-}
+// }
 
     }
-  
-}
+  }
 
-}
+
