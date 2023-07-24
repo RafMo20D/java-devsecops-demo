@@ -40,8 +40,8 @@ pipeline {
      }
     stage('Kubernetes Deployment - DEV') {
           steps {
-            sh "sed -i 's#REPLACE_ME#docker-registry:5000/devsecops-java-demo:latest#g' k8s_deployment_service.yaml"
-            sh "kubectl apply -f k8s_deployment_service.yml"
+        sh "sed -i 's#REPLACE_ME#docker-registry:5000/devsecops-java-demo:latest#g' k8s_deployment_service.yaml"
+        sh "kubectl apply -f k8s_deployment_service.yml"
       }
     }
 //      stage('Docker Build and Push') {

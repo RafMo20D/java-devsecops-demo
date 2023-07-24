@@ -21,27 +21,22 @@ pipeline {
       }
     }
 
-    stage('Mutation Tests - PIT') {
-          steps {
-            sh "mvn org.pitest:pitest-maven:mutationCoverage"
-      }
-      post {
-        always {
-          pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
-        }
-      }
-    }
+     stage('Mutation Tests - PIT') {
+           steps {
+             sh "mvn clean org.pitest:pitest-maven:mutationCoverage site"
+       }
+     }
 
-    stage('Docker image build and push') {
-          steps {
-            sh 'docker build -t docker-registry:5000/devsecops-java-demo:latest .'
-            sh 'docker push docker-registry:5000/devsecops-java-demo:lates'
+         stage('Docker image build and push') {
+      steps {
+        sh 'docker build -t docker-registry:5000/devsecops-java-demo:latest .'
+        sh 'docker push docker-registry:5000/devsecops-java-demo:lates'
        }
      }
     stage('Kubernetes Deployment - DEV') {
-          steps {
-            sh "sed -i 's#REPLACE_ME#docker-registry:5000/devsecops-java-demo:latest#g' k8s_deployment_service.yaml"
-            sh "kubectl apply -f k8s_deployment_service.yml"
+      steps {
+        sh "sed -i 's#REPLACE_ME#docker-registry:5000/devsecops-java-demo:latest#g' k8s_deployment_service.yaml"
+        sh "kubectl apply -f k8s_deployment_service.yml"
       }
     }
 //      stage('Docker Build and Push') {
@@ -70,3 +65,4 @@ pipeline {
   }
 
 
+}
