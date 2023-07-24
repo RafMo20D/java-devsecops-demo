@@ -38,7 +38,7 @@ pipeline {
                  -Dsonar.token=sqp_718df23a8b50d93da4ee58eaf8c095aee7bbd35d"
          }
            timeout(time: 2, unit: 'MINUTES') {
-             script {
+           script {
              waitForQualityGate abortPipeline: true
            }
          }

@@ -33,12 +33,12 @@ pipeline {
             withSonarQubeEnv('SonarQube') {
              sh "mvn clean verify sonar:sonar \
                  -Dsonar.projectKey=java-devsecops-demo \
-                 -Dsonar.projectName='java-devsecops-demo' \
-                 -Dsonar.host.url=http://asasatech.eastus.cloudapp.azure.com:9000 \
-                 -Dsonar.token=sqp_718df23a8b50d93da4ee58eaf8c095aee7bbd35d"
+  -Dsonar.projectName='java-devsecops-demo' \
+  -Dsonar.host.url=http://asasatech.eastus.cloudapp.azure.com:9000 \
+  -Dsonar.token=sqp_718df23a8b50d93da4ee58eaf8c095aee7bbd35d"
          }
-           timeout(time: 2, unit: 'MINUTES') {
-             script {
+         timeout(time: 2, unit: 'MINUTES') {
+           script {
              waitForQualityGate abortPipeline: true
            }
          }
