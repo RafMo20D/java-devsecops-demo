@@ -88,8 +88,6 @@
 			        </outputFormats>
 			    </configuration>
 			   </plugin>
-
-			   
 <!--                   Dependency Check Plugin                   -->
                 <plugin>
                    <groupId>org.owasp</groupId>
