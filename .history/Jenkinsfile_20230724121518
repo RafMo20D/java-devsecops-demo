@@ -28,23 +28,23 @@ pipeline {
 
     }
 
-    // stage('Docker image build and push') {
-    //       steps {
-    //         sh 'docker build -t docker-registry:5000/devsecops-java-demo:latest .'
-    //         sh 'docker push docker-registry:5000/devsecops-java-demo:lates'
-    //    }
-    //  }
-    // stage('Kubernetes Deployment - DEV') {
-    //       steps {
-    //         sh "sed -i 's#REPLACE_ME#docker-registry:5000/devsecops-java-demo:latest#g' k8s_deployment_service.yaml"
-    //         sh "kubectl apply -f k8s_deployment_service.yml"
-    //   }
-    // }
+    stage('Docker image build and push') {
+          steps {
+            sh 'docker build -t docker-registry:5000/devsecops-java-demo:latest .'
+            sh 'docker push docker-registry:5000/devsecops-java-demo:lates'
+       }
+     }
+    stage('Kubernetes Deployment - DEV') {
+          steps {
+            sh "sed -i 's#REPLACE_ME#docker-registry:5000/devsecops-java-demo:latest#g' k8s_deployment_service.yaml"
+            sh "kubectl apply -f k8s_deployment_service.yml"
+      }
+    }
      stage('Docker Build and Push') {
            steps {
               withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
                   sh 'printenv'
-                  sh 'sudo docker build -t drop149/devsecops-java-demo:""$GIT_COMMIT"" .'
+                  sh 'sudo docker build -t drop149/devsecops-java-demo:5000/java-app:latest"" .'
                   sh 'docker push drop149/devsecops-java-demo:""$GIT_COMMIT""'
          
        }
@@ -63,8 +63,6 @@ pipeline {
 }
 
     }
-  
-  
   }
+}
 
-   }

@@ -44,7 +44,7 @@ pipeline {
            steps {
               withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
                   sh 'printenv'
-                  sh 'sudo docker build -t drop149/devsecops-java-demo:""$GIT_COMMIT"" .'
+                  sh 'sudo docker build -t drop149/devsecops-java-demo:5000/java-app:latest"" .'
                   sh 'docker push drop149/devsecops-java-demo:""$GIT_COMMIT""'
          
        }
@@ -64,7 +64,6 @@ pipeline {
 
     }
   
-  
-  }
+}
 
-   }
+
