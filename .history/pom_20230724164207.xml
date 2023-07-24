@@ -5,7 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.2</version>
+		<version><!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.1.2</version>
+    <type>pom</type>
+</dependency>
+</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
