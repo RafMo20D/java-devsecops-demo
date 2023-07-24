@@ -88,7 +88,9 @@
 							<configuration>
 								<failBuildOnCVSS>8</failBuildOnCVSS>
 							</configuration>
-							
+							<executions>
+
+							</executions>
 						  </plugin>
 
 		</plugins>

@@ -86,11 +86,16 @@
 							<artifactId>dependency-check-maven</artifactId>
 							<version>8.3.1</version>
 							<configuration>
-								<failBuildOnCVSS>8</failBuildOnCVSS>
+								<failBuildOnCVSS>9</failBuildOnCVSS>
 							</configuration>
-							
-						  </plugin>
-
+							<executions>
+								<execution>
+									<goals>
+										<goal>check</goal>
+									</goals>
+								</execution>
+							</executions>
+						  </plugin>	
 		</plugins>
 	</build>
 
