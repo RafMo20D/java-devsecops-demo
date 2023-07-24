@@ -37,22 +37,11 @@ pipeline {
 
        }
      stage('Vulnerability Scan - Docker') {
-           steps {
-             parallel(
-        	        "Dependency Scan": {
-        	               	sh "mvn dependency-check:check"
-	 		    }
-        )
-      }
-      post{
-          always{
-            dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
-          }
-      }
-
-
-
-
+      steps {
+        parallel(
+        	"Dependency Scan": {
+        		sh "mvn dependency-check:check"
+	 		}
 
     // stage('Docker image build and push') {
     //       steps {
@@ -94,5 +83,3 @@ pipeline {
   }
 
    }
-
-}
