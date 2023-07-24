@@ -80,13 +80,12 @@
 							   </dependency>
 							</dependencies>
 						 </plugin>
-						 
 						 <plugin>
 							<groupId>org.owasp</groupId>
 							<artifactId>dependency-check-maven</artifactId>
 							<version>8.3.1</version>
 							<configuration>
-								<failBuildOnCVSS>9</failBuildOnCVSS>
+								<failBuildOnCVSS>8</failBuildOnCVSS>
 							</configuration>
 							<executions>
 								<execution>

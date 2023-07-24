@@ -80,7 +80,6 @@
 							   </dependency>
 							</dependencies>
 						 </plugin>
-						 
 						 <plugin>
 							<groupId>org.owasp</groupId>
 							<artifactId>dependency-check-maven</artifactId>
